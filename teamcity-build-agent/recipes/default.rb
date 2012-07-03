@@ -43,6 +43,7 @@ bash "ensure-buildAgent-running" do
   cwd install_dir + "/bin"
   code <<-EOH
     chmod u+x agent.sh
+    export JRE_HOME=/usr
     ./agent.sh start
   EOH
 end
