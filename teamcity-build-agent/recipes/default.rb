@@ -28,13 +28,22 @@ bash "unzip-buildAgent" do
   EOH
 end
 
+file install_dir + "/bin/install.sh" do
+  action :touch
+  mode 00755
+end
+
 bash "install-buildAgent" do
   user user
   cwd install_dir + "/bin"
   code <<-EOH 
-    chmod u+x install.sh 
     ./install.sh #{server_host}
   EOH
+end
+
+file install_dir + "/bin/agent.sh" do
+  action :touch
+  mode 00755
 end
 
 bash "ensure-buildAgent-running" do
@@ -42,7 +51,6 @@ bash "ensure-buildAgent-running" do
   not_if "pgrep -f buildServer.agent.Launcher"
   cwd install_dir + "/bin"
   code <<-EOH
-    chmod u+x agent.sh
     export JRE_HOME=/usr
     ./agent.sh start
   EOH
