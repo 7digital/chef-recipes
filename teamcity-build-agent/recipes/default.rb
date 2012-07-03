@@ -33,7 +33,7 @@ bash "install-buildAgent" do
   cwd install_dir + "/bin"
   code <<-EOH 
     chmod u+x install.sh 
-    ./install.sh #{install_dir}
+    ./install.sh #{server_host}
   EOH
 end
 
