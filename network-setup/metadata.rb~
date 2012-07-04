@@ -1,0 +1,6 @@
+recipe "delivery-deploy", "Prepares a delivery monitor for deployment"
+
+%w{ debian ubuntu }.each do |os|
+  supports os
+end
+
